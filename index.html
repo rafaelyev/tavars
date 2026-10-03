@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="uz">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#101510">
+  <meta name="description" content="TAVAR'S — offline bicycle spare-parts shop management system">
+  <title>TAVAR'S — Do'kon boshqaruvi</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon-192.png">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="appLoader" class="app-loader" role="status" aria-live="polite" aria-label="Tavar's yuklanmoqda">
+    <div class="loading-word" aria-hidden="true">
+      <span>T</span><span>a</span><span>v</span><span>a</span><span>r</span><span>'</span><span>s</span>
+    </div>
+    <div class="loader-caption">Bicycle Parts Management</div>
+  </div>
+
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <img src="icon-192.png" alt="TAVAR'S" class="brand-logo">
+        <div><div class="brand">TAVARS <span>v16</span></div><div class="subtitle">Bicycle Parts Management</div></div>
+      </div>
+      <div class="sidebar-nav-label">ASOSIY</div>
+      <nav class="sidebar-nav" aria-label="Asosiy navigatsiya">
+        <button data-route="dashboard" class="nav-item active"><span>⌂</span><small>Bosh sahifa</small></button>
+        <button data-route="inventory" class="nav-item"><span>▣</span><small>Ombor</small></button>
+        <button data-route="sales" class="nav-item"><span>🛒</span><small>Sotuv</small></button>
+        <button data-route="archive" class="nav-item"><span>▥</span><small>Arxiv</small></button>
+        <button data-route="purchases" class="nav-item"><span>◇</span><small>Xaridlar</small></button>
+        <button data-route="settings" class="nav-item"><span>⚙</span><small>Sozlamalar</small></button>
+      </nav>
+      <div class="sidebar-spacer"></div>
+      <div class="sidebar-tip">
+        <div class="tip-icon">🚲</div>
+        <b>Better parts.<br>Smoother rides.<br>Bigger profits.</b>
+        <span>TAVARS <strong>v16</strong></span>
+      </div>
+    </aside>
+
+    <div class="main-shell">
+      <header class="topbar">
+        <div class="mobile-brand"><img src="icon-192.png" alt="" class="brand-logo"><b>TAVARS</b></div>
+        <div class="global-search"><span>⌕</span><input id="globalSearch" placeholder="Tovar, xarid yoki boshqa narsani qidiring..." aria-label="Qidirish"></div>
+        <div class="top-actions">
+          <button class="icon-btn notification-btn" aria-label="Bildirishnomalar" title="Bildirishnomalar">🔔<i></i></button>
+          <div class="profile-divider"></div>
+          <label class="profile" title="Joriy foydalanuvchi">
+            <div class="avatar">A</div>
+            <div class="profile-copy"><b>Admin</b><small>Administrator</small></div>
+            
+          </label>
+          <button class="icon-btn" id="themeToggle" aria-label="Kun/tun rejimi" title="Kun/tun rejimi">☀️</button>
+        </div>
+      </header>
+
+      <main id="app"></main>
+    </div>
+  </div>
+
+  <nav class="dock" aria-label="Mobil navigatsiya">
+    <button data-route="dashboard" class="nav-item active"><span>⌂</span><small>Bosh</small></button>
+    <button data-route="inventory" class="nav-item"><span>▣</span><small>Ombor</small></button>
+    <button data-route="sales" class="nav-item"><span>🛒</span><small>Sotuv</small></button>
+    <button data-route="archive" class="nav-item"><span>▥</span><small>Arxiv</small></button>
+    <button data-route="purchases" class="nav-item"><span>◇</span><small>Xaridlar</small></button>
+    <button data-route="settings" class="nav-item"><span>⚙</span><small>Sozlama</small></button>
+  </nav>
+
+  <div id="modalRoot"></div>
+  <div id="toastRoot" class="toast-root"></div>
+  <script src="app.js"></script>
+</body>
+</html>
