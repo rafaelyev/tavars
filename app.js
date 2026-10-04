@@ -121,8 +121,6 @@ function findProduct(name,buy){
   return state.products.find(p=>normalizeProductName(p.name)===key && Number(p.buy)===cost);
 }
 function removeEmptyProduct(p){
-  // 0 dona bo'lgan mahsulot ham omborda saqlanadi.
-  // U sotuv ro'yxatida ko'rinmaydi, lekin keyin yana zaxira qo'shish mumkin.
   return false;
 }
 function dayDate(d){const x=new Date(d);x.setHours(0,0,0,0);return x}
