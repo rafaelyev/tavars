@@ -65,7 +65,7 @@ html.light-mode{--bg:#f5f6f3;--surface:#fff;--surface-2:#f8faf7;--ink:#121713;--
 @media(max-width:1180px){.activity-card,.chart-card,.quick-actions{grid-column:1!important;grid-row:auto!important}}
 @media(max-width:650px){.metric .value{font-size:16px;letter-spacing:-.03em}.metric{min-height:112px;padding:14px}.dashboard-hero{padding-bottom:6px}}
 #pinLock{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;background:#101510}
-.pin-box{background:#fff;border-radius:18px;padding:28px;width:min(320px,90vw);display:grid;gap:12px;text-align:center}
+.pin-box{background:#fff;border-radius:18px;padding:28px;width:min(480px,135vw);display:grid;gap:12px;text-align:center}
 .pin-box h2,.pin-box p{margin:0}
 .pin-box input{font-size:28px;letter-spacing:.4em;text-align:center;padding:10px;border:1px solid var(--line);border-radius:12px}
 .pin-err{color:var(--red);min-height:18px;font-size:13px}
