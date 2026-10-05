@@ -380,63 +380,18 @@ function pinButtons(){return localStorage.getItem(PIN_KEY)?`<button class="btn" 
 async function checkPin(pin){return (await hashPin(pin))===localStorage.getItem(PIN_KEY)}
 actions["set-pin"]=()=>{const has=!!localStorage.getItem(PIN_KEY);openModal(has?"PINni o'zgartirish":"PIN yaratish",(has?pinField("Hozirgi PIN","old"):"")+pinField("Yangi PIN (4–6 raqam)","pin")+pinField("PINni takrorlang","pin2"),async f=>{const pin=String(f.get("pin")||""),pin2=String(f.get("pin2")||"");if(has&&!(await checkPin(String(f.get("old")||""))))return toast("Hozirgi PIN noto'g'ri.","error");if(!/^\d{4,6}$/.test(pin))return toast("PIN 4 dan 6 gacha raqamdan iborat bo'lsin.","error");if(pin!==pin2)return toast("PIN kodlar bir xil emas.","error");localStorage.setItem(PIN_KEY,await hashPin(pin));document.getElementById("modalRoot").innerHTML="";toast("PIN saqlandi.");render()})};
 actions["remove-pin"]=()=>openModal("PINni o'chirish",pinField("Hozirgi PIN","old"),async f=>{if(!(await checkPin(String(f.get("old")||""))))return toast("PIN noto'g'ri.","error");localStorage.removeItem(PIN_KEY);document.getElementById("modalRoot").innerHTML="";toast("PIN o'chirildi.");render()},"O'chirish");
-function showLock(){if(!localStorage.getItem(PIN_KEY))return;const d=document.createElement("div");d.id="pinLock";d.innerHTML=`<form class="pin-box"><h2>🔒 TAVAR'S</h2><p>PIN kodni kiriting</p><input id="pinInput" type="password" inputmode="numeric" maxlength="6" autocomplete="off"><div class="pin-err" id="pinErr"></div><button class="btn primary">Kirish</button></form>`;document.body.appendChild(d);const input=d.querySelector("#pinInput"),err=d.querySelector("#pinErr");d.querySelector("form").onsubmit=async e=>{e.preventDefault();if(await checkPin(input.value))d.remove();else{err.textContent="PIN noto'g'ri";input.value="";input.focus()}};setTimeout(()=>input.focus(),50)}
-document.addEventListener("DOMContentLoaded", () => {
-    const protectPinInput = () => {
-        const input = document.getElementById("pinInput");
-
-        if (!input) return;
-
-        input.setAttribute("autocomplete", "new-password");
-        input.setAttribute("autocorrect", "off");
-        input.setAttribute("autocapitalize", "off");
-        input.setAttribute("spellcheck", "false");
-
-        // Brauzer avtomatik qo'ygan qiymatni tozalash
-        input.value = "";
-
-        setTimeout(() => {
-            input.value = "";
-        }, 100);
-
-        setTimeout(() => {
-            input.value = "";
-        }, 500);
-    };
-
-    protectPinInput();
-
-    // showLock() keyinroq input yaratgani uchun kuzatamiz
-    const observer = new MutationObserver(() => {
-        protectPinInput();
-    });
-
-    observer.observe(document.body, {
-        childList: true,
-        subtree: true
-    });
-});
+function showLock(){if(!localStorage.getItem(PIN_KEY))return;const d=document.createElement("div");d.id="pinLock";d.innerHTML=`<form class="pin-box"><h2>🔒 TAVAR'S</h2><p>PIN kodni kiriting</p><input
+    id="pinInput"
+    type="text"
+    inputmode="numeric"
+    maxlength="6"
+    autocomplete="off"
+    autocorrect="off"
+    autocapitalize="off"
+    spellcheck="false"
+><div class="pin-err" id="pinErr"></div><button class="btn primary">Kirish</button></form>`;document.body.appendChild(d);const input=d.querySelector("#pinInput"),err=d.querySelector("#pinErr");d.querySelector("form").onsubmit=async e=>{e.preventDefault();if(await checkPin(input.value))d.remove();else{err.textContent="PIN noto'g'ri";input.value="";input.focus()}};setTimeout(()=>input.focus(),50)}
 showLock();
-
-
-setTimeout(() => {
-    const pin = document.getElementById("pinInput");
-
-    if (pin) {
-        pin.setAttribute("autocomplete", "new-password");
-        pin.setAttribute("name", "tavars-pin-" + Date.now());
-        pin.value = "";
-    }
-}, 100);
-
 syncCash();
 applyTheme();
 render();
-setTimeout(()=>document.getElementById("appLoader")?.classList.add("is-hidden"),1100);
-let refreshDay=today();
-setInterval(()=>{const d=today();if(d!==refreshDay){refreshDay=d;render();}},60000);
-document.addEventListener("keydown",e=>{if(e.key==="Escape")document.getElementById("modalRoot").innerHTML=""});
-const loginForm = document.getElementById("loginForm");
-const pinInput = document.getElementById("pin");
-
 
