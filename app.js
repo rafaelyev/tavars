@@ -382,6 +382,18 @@ actions["set-pin"]=()=>{const has=!!localStorage.getItem(PIN_KEY);openModal(has?
 actions["remove-pin"]=()=>openModal("PINni o'chirish",pinField("Hozirgi PIN","old"),async f=>{if(!(await checkPin(String(f.get("old")||""))))return toast("PIN noto'g'ri.","error");localStorage.removeItem(PIN_KEY);document.getElementById("modalRoot").innerHTML="";toast("PIN o'chirildi.");render()},"O'chirish");
 function showLock(){if(!localStorage.getItem(PIN_KEY))return;const d=document.createElement("div");d.id="pinLock";d.innerHTML=`<form class="pin-box"><h2>🔒 TAVAR'S</h2><p>PIN kodni kiriting</p><input id="pinInput" type="password" inputmode="numeric" maxlength="6" autocomplete="off"><div class="pin-err" id="pinErr"></div><button class="btn primary">Kirish</button></form>`;document.body.appendChild(d);const input=d.querySelector("#pinInput"),err=d.querySelector("#pinErr");d.querySelector("form").onsubmit=async e=>{e.preventDefault();if(await checkPin(input.value))d.remove();else{err.textContent="PIN noto'g'ri";input.value="";input.focus()}};setTimeout(()=>input.focus(),50)}
 showLock();
+
+
+setTimeout(() => {
+    const pin = document.getElementById("pinInput");
+
+    if (pin) {
+        pin.setAttribute("autocomplete", "new-password");
+        pin.setAttribute("name", "tavars-pin-" + Date.now());
+        pin.value = "";
+    }
+}, 100);
+
 syncCash();
 applyTheme();
 render();
@@ -392,38 +404,4 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")document.getElementB
 const loginForm = document.getElementById("loginForm");
 const pinInput = document.getElementById("pin");
 
-// PINni brauzer avtomatik to'ldirishiga qarshi
-pinInput.setAttribute("autocomplete", "new-password");
 
-// Form yuborilganda
-loginForm.addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    const pin = pinInput.value.trim();
-
-    // PIN
-    const correctPin = "1234";
-
-    if (pin === correctPin) {
-        // PIN to'g'ri
-        alert("Kirish muvaffaqiyatli!");
-
-        // PINni darhol o'chiramiz
-        pinInput.value = "";
-
-        // Bu yerda panelni ochamiz
-        window.location.href = "admin.html";
-
-    } else {
-        alert("PIN noto'g'ri!");
-
-        // Noto'g'ri PINni ham saqlab qolmaymiz
-        pinInput.value = "";
-        pinInput.focus();
-    }
-});
-
-// Sahifa ochilganda inputni tozalash
-window.addEventListener("load", function () {
-    pinInput.value = "";
-});
