@@ -373,28 +373,6 @@ reset:()=>confirmAction("Barcha mahalliy ma'lumotlar butunlay o'chiriladi. Davom
 };
 const gs=document.getElementById("globalSearch");if(gs)gs.addEventListener("input",e=>{searchTerm=e.target.value;if(!["inventory","sales","purchases"].includes(route))route="inventory";render()});
 // ===== PIN qulf =====
-const form = document.getElementById("loginForm");
-const pinInput = document.getElementById("pin");
-
-form.addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    const pin = pinInput.value;
-
-    if (pin === "1234") {
-        // PIN to'g'ri
-        console.log("Kirish muvaffaqiyatli");
-
-        // PINni saqlamaymiz
-        pinInput.value = "";
-
-        // Bu yerda panelni ochish kodini yozasiz
-    } else {
-        alert("PIN noto'g'ri!");
-        pinInput.value = "";
-        pinInput.focus();
-    }
-});
 const PIN_KEY="tavars-pin-v1";
 async function hashPin(pin){const data=new TextEncoder().encode("tavars:"+pin);if(window.crypto&&crypto.subtle){const buf=await crypto.subtle.digest("SHA-256",data);return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,"0")).join("")}let h=5381;for(const c of data)h=((h<<5)+h+c)>>>0;return "f"+h}
 const pinField=(label,name)=>`<div class="field"><label>${label}</label><input name="${name}" type="password" inputmode="numeric" maxlength="6" autocomplete="off" required></div>`;
@@ -411,3 +389,41 @@ setTimeout(()=>document.getElementById("appLoader")?.classList.add("is-hidden"),
 let refreshDay=today();
 setInterval(()=>{const d=today();if(d!==refreshDay){refreshDay=d;render();}},60000);
 document.addEventListener("keydown",e=>{if(e.key==="Escape")document.getElementById("modalRoot").innerHTML=""});
+const loginForm = document.getElementById("loginForm");
+const pinInput = document.getElementById("pin");
+
+// PINni brauzer avtomatik to'ldirishiga qarshi
+pinInput.setAttribute("autocomplete", "new-password");
+
+// Form yuborilganda
+loginForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const pin = pinInput.value.trim();
+
+    // PIN
+    const correctPin = "1234";
+
+    if (pin === correctPin) {
+        // PIN to'g'ri
+        alert("Kirish muvaffaqiyatli!");
+
+        // PINni darhol o'chiramiz
+        pinInput.value = "";
+
+        // Bu yerda panelni ochamiz
+        window.location.href = "admin.html";
+
+    } else {
+        alert("PIN noto'g'ri!");
+
+        // Noto'g'ri PINni ham saqlab qolmaymiz
+        pinInput.value = "";
+        pinInput.focus();
+    }
+});
+
+// Sahifa ochilganda inputni tozalash
+window.addEventListener("load", function () {
+    pinInput.value = "";
+});
