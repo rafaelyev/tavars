@@ -76,3 +76,7 @@ html.light-mode{--bg:#f5f6f3;--surface:#fff;--surface-2:#f8faf7;--ink:#121713;--
 .pin-box input:focus{border-color:#6fb1ff;box-shadow:0 0 0 3px rgba(80,150,255,.35)}
 .pin-box .btn.primary{width:100%;border:0;color:#fff;background:linear-gradient(135deg,#3b82f6,#06b6d4);padding:13px;border-radius:14px;font-weight:800;box-shadow:0 8px 24px rgba(37,99,235,.5)}
 .pin-err{color:#ff9aa5;min-height:18px;font-size:13px}
+#pinInput {
+    -webkit-text-security: disc;
+    text-security: disc;
+}
