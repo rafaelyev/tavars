@@ -385,10 +385,3 @@ showLock();
 syncCash();
 applyTheme();
 render();
-setTimeout(()=>document.getElementById("appLoader")?.classList.add("is-hidden"),1100);
-let refreshDay=today();
-setInterval(()=>{const d=today();if(d!==refreshDay){refreshDay=d;render();}},60000);
-document.addEventListener("keydown",e=>{if(e.key==="Escape")document.getElementById("modalRoot").innerHTML=""});
-const loginForm = document.getElementById("loginForm");
-const pinInput = document.getElementById("pin");
-shunday yozganman
