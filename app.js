@@ -384,6 +384,8 @@ actions["set-pin"]=()=>{const has=!!localStorage.getItem(PIN_KEY);openModal(has?
 actions["remove-pin"]=()=>openModal("PINni o'chirish",pinField("Hozirgi PIN","old"),async f=>{if(!(await checkPin(String(f.get("old")||""))))return toast("PIN noto'g'ri.","error");localStorage.removeItem(PIN_KEY);document.getElementById("modalRoot").innerHTML="";toast("PIN o'chirildi.");render()},"O'chirish");
 function showLock(){if(!localStorage.getItem(PIN_KEY))return;const d=document.createElement("div");d.id="pinLock";d.innerHTML=`<form class="pin-box"><h2>🔒 TAVAR'S</h2><p>PIN kodni kiriting</p><input id="pinInput" type="password" inputmode="numeric" maxlength="6" autocomplete="off"><div class="pin-err" id="pinErr"></div><button class="btn primary">Kirish</button></form>`;document.body.appendChild(d);const input=d.querySelector("#pinInput"),err=d.querySelector("#pinErr");d.querySelector("form").onsubmit=async e=>{e.preventDefault();if(await checkPin(input.value))d.remove();else{err.textContent="PIN noto'g'ri";input.value="";input.focus()}};setTimeout(()=>input.focus(),50)}
 showLock();
+document.addEventListener("selectstart",e=>{if(!e.target.closest||!e.target.closest("input,textarea"))e.preventDefault()});
+document.addEventListener("contextmenu",e=>{if(!e.target.closest("input,textarea"))e.preventDefault()});
 syncCash();
 applyTheme();
 render();
