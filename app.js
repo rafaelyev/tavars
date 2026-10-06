@@ -374,6 +374,16 @@ const actions={
 reset:()=>confirmAction("Barcha mahalliy ma'lumotlar butunlay o'chiriladi. Davom etasizmi?",()=>{localStorage.removeItem(KEY);state=load();toast("Ma'lumotlar tozalandi.");render()})
 };
 const gs=document.getElementById("globalSearch");if(gs)gs.addEventListener("input",e=>{searchTerm=e.target.value;if(!["inventory","sales","purchases"].includes(route))route="inventory";render()});
+// ===== PIN qulf =====
+const PIN_KEY="tavars-pin-v1";
+async function hashPin(pin){const data=new TextEncoder().encode("tavars:"+pin);if(window.crypto&&crypto.subtle){const buf=await crypto.subtle.digest("SHA-256",data);return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,"0")).join("")}let h=5381;for(const c of data)h=((h<<5)+h+c)>>>0;return "f"+h}
+const pinField=(label,name)=>`<div class="field"><label>${label}</label><input name="${name}" type="password" inputmode="numeric" maxlength="6" autocomplete="off" required></div>`;
+function pinButtons(){return localStorage.getItem(PIN_KEY)?`<button class="btn" data-action="set-pin">🔒 PINni o'zgartirish</button><button class="btn danger" data-action="remove-pin">PINni o'chirish</button>`:`<button class="btn" data-action="set-pin">🔒 PIN yaratish</button>`}
+async function checkPin(pin){return (await hashPin(pin))===localStorage.getItem(PIN_KEY)}
+actions["set-pin"]=()=>{const has=!!localStorage.getItem(PIN_KEY);openModal(has?"PINni o'zgartirish":"PIN yaratish",(has?pinField("Hozirgi PIN","old"):"")+pinField("Yangi PIN (4–6 raqam)","pin")+pinField("PINni takrorlang","pin2"),async f=>{const pin=String(f.get("pin")||""),pin2=String(f.get("pin2")||"");if(has&&!(await checkPin(String(f.get("old")||""))))return toast("Hozirgi PIN noto'g'ri.","error");if(!/^\d{4,6}$/.test(pin))return toast("PIN 4 dan 6 gacha raqamdan iborat bo'lsin.","error");if(pin!==pin2)return toast("PIN kodlar bir xil emas.","error");localStorage.setItem(PIN_KEY,await hashPin(pin));document.getElementById("modalRoot").innerHTML="";toast("PIN saqlandi.");render()})};
+actions["remove-pin"]=()=>openModal("PINni o'chirish",pinField("Hozirgi PIN","old"),async f=>{if(!(await checkPin(String(f.get("old")||""))))return toast("PIN noto'g'ri.","error");localStorage.removeItem(PIN_KEY);document.getElementById("modalRoot").innerHTML="";toast("PIN o'chirildi.");render()},"O'chirish");
+function showLock(){if(!localStorage.getItem(PIN_KEY))return;const d=document.createElement("div");d.id="pinLock";d.innerHTML=`<form class="pin-box"><h2>🔒 TAVAR'S</h2><p>PIN kodni kiriting</p><input id="pinInput" type="password" inputmode="numeric" maxlength="6" autocomplete="off"><div class="pin-err" id="pinErr"></div><button class="btn primary">Kirish</button></form>`;document.body.appendChild(d);const input=d.querySelector("#pinInput"),err=d.querySelector("#pinErr");d.querySelector("form").onsubmit=async e=>{e.preventDefault();if(await checkPin(input.value))d.remove();else{err.textContent="PIN noto'g'ri";input.value="";input.focus()}};setTimeout(()=>input.focus(),50)}
+showLock();
 syncCash();
 applyTheme();
 render();
