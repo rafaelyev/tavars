@@ -196,12 +196,12 @@ dashboard:()=>{
       <div class="hero-art"><div class="hero-ring"></div><div class="hero-bike">🚲</div><div class="hero-copy">QUALITY PARTS<br><b>KEEP YOU<br>MOVING</b></div></div>
     </div>
     <div class="grid metrics dashboard-metrics">
-      <div class="card metric accent"><div class="metric-icon">▣</div><div class="label">Joriy kassa</div><div class="value">${money(state.cash)}</div><div class="metric-foot ${w.net>=0?'positive':'negative'}">${w.net>=0?'↑':'↓'} ${money(Math.abs(w.net))} <span>shu hafta</span></div></div>
+      <div class="card metric accent"><div class="metric-icon">💳</div><div class="label">Joriy kassa</div><div class="value">${money(state.cash)}</div><div class="metric-foot ${w.net>=0?'positive':'negative'}">${w.net>=0?'↑':'↓'} ${money(Math.abs(w.net))} <span>shu hafta</span></div></div>
       <div class="card metric"><div class="metric-icon blue">🛒</div><div class="label">Bugungi sotuv</div><div class="value">${money(t.revenue)}</div><div class="metric-foot positive">↑ ${t.units} dona <span>bugun</span></div></div>
-      <div class="card metric"><div class="metric-icon green">▥</div><div class="label">Bugungi foyda</div><div class="value">${money(t.profit)}</div><div class="metric-foot positive">↑ foyda <span>bugun</span></div></div>
-      <div class="card metric"><div class="metric-icon red">−</div><div class="label">Bugungi xarajat</div><div class="value">${money(t.expense)}</div><div class="metric-foot negative">↓ xarajat <span>bugun</span></div></div>
-      <div class="card metric"><div class="metric-icon purple">♙</div><div class="label">Mijoz qarzi</div><div class="value">${money(dbt.sum)}</div><div class="metric-foot"><span>${dbt.count} ta sotuv</span></div></div>
-      <div class="card metric"><div class="metric-icon dark">□</div><div class="label">Ombor qiymati</div><div class="value">${money(stockValue)}</div><div class="metric-foot"><span>${totalUnits} dona mahsulot</span></div></div>
+      <div class="card metric"><div class="metric-icon green">📈</div><div class="label">Bugungi foyda</div><div class="value">${money(t.profit)}</div><div class="metric-foot positive">↑ foyda <span>bugun</span></div></div>
+      <div class="card metric"><div class="metric-icon red">📉</div><div class="label">Bugungi xarajat</div><div class="value">${money(t.expense)}</div><div class="metric-foot negative">↓ xarajat <span>bugun</span></div></div>
+      <div class="card metric"><div class="metric-icon purple">👤</div><div class="label">Mijoz qarzi</div><div class="value">${money(dbt.sum)}</div><div class="metric-foot"><span>${dbt.count} ta sotuv</span></div></div>
+      <div class="card metric"><div class="metric-icon dark">🏷️</div><div class="label">Ombor qiymati</div><div class="value">${money(stockValue)}</div><div class="metric-foot"><span>${totalUnits} dona mahsulot</span></div></div>
     </div>
 
     <div class="dashboard-grid-main">
