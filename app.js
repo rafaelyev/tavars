@@ -193,7 +193,7 @@ dashboard:()=>{
   return `<section class="dashboard-page">
     <div class="dashboard-hero">
       <div><div class="eyebrow">XUSH KELIBSIZ,</div><h1>Biznesingiz<br><span>bir qarashda.</span></h1><p>Ombor, sotuv, kassa va foydani bitta zamonaviy paneldan boshqaring.</p><div class="hero-meta"><span>◷ ${formatDateUz(today())}</span><i></i><span class="status-dot">Hammasi joyida</span></div></div>
-      <div class="hero-art"><div class="hero-ring"></div><div class="hero-bike">🚲</div><div class="hero-copy">QUALITY PARTS<br><b>KEEP YOU<br>MOVING</b></div></div>
+      <div class="hero-art"><div class="hero-ring"></div><div class="hero-bike">🔥</div><div class="hero-copy">TAVARLARINGIZNI<br><b>SOTISHDA<br>DAVOM ETING</b></div></div>
     </div>
     <div class="grid metrics dashboard-metrics">
       <div class="card metric accent"><div class="metric-icon">💳</div><div class="label">Joriy kassa</div><div class="value">${money(state.cash)}</div><div class="metric-foot ${w.net>=0?'positive':'negative'}">${w.net>=0?'↑':'↓'} ${money(Math.abs(w.net))} <span>shu hafta</span></div></div>
