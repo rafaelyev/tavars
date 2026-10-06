@@ -78,3 +78,4 @@ html.light-mode{--bg:#f5f6f3;--surface:#fff;--surface-2:#f8faf7;--ink:#121713;--
 .pin-err{color:#ff9aa5;min-height:18px;font-size:13px}
 body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 input,textarea,select{-webkit-user-select:text;user-select:text}
+#pinInput,input[name="pin"],input[name="pin2"],input[name="old"]{-webkit-text-security:disc;text-security:disc}
