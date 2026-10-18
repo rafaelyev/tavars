@@ -79,3 +79,90 @@ html.light-mode{--bg:#f5f6f3;--surface:#fff;--surface-2:#f8faf7;--ink:#121713;--
 body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 input,textarea,select{-webkit-user-select:text;user-select:text}
 #pinInput,input[name="pin"],input[name="pin2"],input[name="old"]{-webkit-text-security:disc;text-security:disc}
+/* ===== Toast (react-toastify uslubida) ===== */
+.toastify.rt-toast {
+  --rt-color: #16a34a;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 280px;
+  max-width: 380px;
+  padding: 14px 40px 18px 14px;
+  background: #ffffff !important;
+  color: #1f2937;
+  font-family: inherit;
+  font-size: 14.5px;
+  font-weight: 500;
+  line-height: 1.4;
+  border-radius: 12px;
+  border-left: 5px solid var(--rt-color);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .15), 0 2px 8px rgba(0, 0, 0, .08);
+  overflow: hidden;
+  position: fixed;
+  transition: all .4s cubic-bezier(.21, 1.02, .73, 1);
+}
+
+.rt-success { --rt-color: #16a34a; }
+.rt-error   { --rt-color: #dc2626; }
+.rt-warning { --rt-color: #f59e0b; }
+.rt-info    { --rt-color: #2563eb; }
+
+/* Ikonka */
+.rt-toast .rt-icon {
+  flex: 0 0 26px;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--rt-color);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.rt-toast .rt-text { flex: 1; }
+
+/* Yopish tugmasi */
+.rt-toast .toast-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: none;
+  border: none;
+  color: #9ca3af;
+  font-size: 18px;
+  cursor: pointer;
+  opacity: 1;
+  padding: 0;
+}
+.rt-toast .toast-close:hover { color: #374151; }
+
+/* Pastdagi progress chizig'i */
+.rt-toast::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 4px;
+  width: 100%;
+  background: var(--rt-color);
+  transform-origin: left;
+  animation: rt-progress var(--rt-duration, 3000ms) linear forwards;
+}
+.rt-toast:hover::after { animation-play-state: paused; }
+
+@keyframes rt-progress {
+  from { transform: scaleX(1); }
+  to   { transform: scaleX(0); }
+}
+
+/* Telefonda to'liq kenglik */
+@media (max-width: 480px) {
+  .toastify.rt-toast {
+    left: 10px !important;
+    right: 10px !important;
+    max-width: none;
+    min-width: 0;
+  }
+}
