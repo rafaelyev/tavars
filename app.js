@@ -1,19 +1,24 @@
-function toast(text, type = "success") {
-  const colors = {
-    success: "linear-gradient(to right, #16a34a, #22c55e)",
-    error:   "linear-gradient(to right, #dc2626, #ef4444)",
-    warning: "linear-gradient(to right, #d97706, #f59e0b)",
-    info:    "linear-gradient(to right, #2563eb, #3b82f6)"
-  };
-  Toastify({
-    text,
-    duration: 3000,
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+  }[c]));
+}
+
+function toast(text, type = "success", duration = 3000) {
+  const icons = { success: "✓", error: "✕", warning: "!", info: "i" };
+  const t = Toastify({
+    text: `<span class="rt-icon">${icons[type]}</span>
+           <span class="rt-text">${escapeHtml(text)}</span>`,
+    escapeMarkup: false,
+    duration,
     gravity: "top",
     position: "right",
     close: true,
-    stopOnFocus: true,
-    style: { background: colors[type] }
-  }).showToast();
+    stopOnFocus: false,
+    className: `rt-toast rt-${type}`
+  });
+  t.showToast();
+  t.toastElement.style.setProperty("--rt-duration", duration + "ms");
 }
 // Sotuv yakunlanganda
 toast("Sotuv muvaffaqiyatli yakunlandi!", "success");
