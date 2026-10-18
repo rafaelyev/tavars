@@ -81,62 +81,66 @@ input,textarea,select{-webkit-user-select:text;user-select:text}
 #pinInput,input[name="pin"],input[name="pin2"],input[name="old"]{-webkit-text-security:disc;text-security:disc}
 /* ===== Toast (react-toastify uslubida) ===== */
 .toastify.rt-toast {
-  --rt-color: #16a34a;
+  --rt-color: #07bc0c;
+  --rt-bg: #ffffff;
+  --rt-text: #757575;
+
   display: flex;
   align-items: center;
-  gap: 12px;
-  min-width: 280px;
-  max-width: 380px;
-  padding: 14px 40px 18px 14px;
-  background: #ffffff !important;
-  color: #1f2937;
-  font-family: inherit;
-  font-size: 14.5px;
-  font-weight: 500;
+  box-sizing: border-box;
+  width: 320px;
+  max-width: calc(100vw - 30px);
+  min-height: 64px;
+  padding: 8px;
+  background: var(--rt-bg) !important;
+  color: var(--rt-text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 14px;
   line-height: 1.4;
-  border-radius: 12px;
-  border-left: 5px solid var(--rt-color);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, .15), 0 2px 8px rgba(0, 0, 0, .08);
+  border-radius: 6px;
+  box-shadow: 0 1px 10px 0 rgba(0, 0, 0, .1), 0 2px 15px 0 rgba(0, 0, 0, .05);
   overflow: hidden;
-  position: fixed;
-  transition: all .4s cubic-bezier(.21, 1.02, .73, 1);
+  opacity: 1;
 }
 
-.rt-success { --rt-color: #16a34a; }
-.rt-error   { --rt-color: #dc2626; }
-.rt-warning { --rt-color: #f59e0b; }
-.rt-info    { --rt-color: #2563eb; }
+.rt-success { --rt-color: #07bc0c; }
+.rt-error   { --rt-color: #e74c3c; }
+.rt-warning { --rt-color: #f1c40f; }
+.rt-info    { --rt-color: #3498db; }
 
 /* Ikonka */
 .rt-toast .rt-icon {
-  flex: 0 0 26px;
-  width: 26px;
-  height: 26px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  background: var(--rt-color);
-  color: #fff;
-  font-size: 14px;
-  font-weight: 700;
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
+  margin: 0 12px 0 6px;
+  color: var(--rt-color);
 }
 
-.rt-toast .rt-text { flex: 1; }
+.rt-toast .rt-text {
+  flex: 1;
+  padding: 6px 28px 6px 0;
+}
 
-/* Yopish tugmasi */
+/* Yopish tugmasi (kichik ×) */
 .rt-toast .toast-close {
   position: absolute;
-  top: 10px;
-  right: 12px;
+  top: 8px;
+  right: 10px;
+  padding: 0;
   background: none;
   border: none;
-  color: #9ca3af;
-  font-size: 18px;
+  font-size: 0;
+  line-height: 1;
+  color: #aaa;
+  opacity: .7;
   cursor: pointer;
-  opacity: 1;
-  padding: 0;
 }
-.rt-toast .toast-close:hover { color: #374151; }
+.rt-toast .toast-close::before {
+  content: "✕";
+  font-size: 12px;
+}
+.rt-toast .toast-close:hover { opacity: 1; }
 
 /* Pastdagi progress chizig'i */
 .rt-toast::after {
@@ -144,8 +148,8 @@ input,textarea,select{-webkit-user-select:text;user-select:text}
   position: absolute;
   left: 0;
   bottom: 0;
-  height: 4px;
   width: 100%;
+  height: 5px;
   background: var(--rt-color);
   transform-origin: left;
   animation: rt-progress var(--rt-duration, 3000ms) linear forwards;
@@ -157,12 +161,19 @@ input,textarea,select{-webkit-user-select:text;user-select:text}
   to   { transform: scaleX(0); }
 }
 
-/* Telefonda to'liq kenglik */
+/* Qorong'i rejim (rasmning o'ng tomonidagidek) */
+body.dark .toastify.rt-toast {
+  --rt-bg: #121212;
+  --rt-text: #fff;
+}
+body.dark .rt-toast .toast-close { color: #fff; }
+
+/* Telefon */
 @media (max-width: 480px) {
   .toastify.rt-toast {
     left: 10px !important;
     right: 10px !important;
+    width: auto;
     max-width: none;
-    min-width: 0;
   }
 }
