@@ -1,3 +1,34 @@
+function toast(text, type = "success") {
+  const colors = {
+    success: "linear-gradient(to right, #16a34a, #22c55e)",
+    error:   "linear-gradient(to right, #dc2626, #ef4444)",
+    warning: "linear-gradient(to right, #d97706, #f59e0b)",
+    info:    "linear-gradient(to right, #2563eb, #3b82f6)"
+  };
+  Toastify({
+    text,
+    duration: 3000,
+    gravity: "top",
+    position: "right",
+    close: true,
+    stopOnFocus: true,
+    style: { background: colors[type] }
+  }).showToast();
+}
+// Sotuv yakunlanganda
+toast("Sotuv muvaffaqiyatli yakunlandi!", "success");
+
+// Tovar qo'shilganda
+toast("Tovar omborga qo'shildi", "success");
+
+// 0 dona tovarni sotishga urinilganda
+toast("Bu tovar omborda tugagan!", "warning");
+
+// Pul yetarli bo'lmaganda yoki maydon bo'sh bo'lsa
+toast("Mijoz bergan pul yetarli emas", "error");
+
+// JSON backup eksport qilinganda
+toast("Backup yuklab olindi", "info");
 if('serviceWorker' in navigator && location.protocol!=='file:'){navigator.serviceWorker.register('./sw.js').catch(()=>{});}
 const KEY="tavars-v1";
 const THEME_KEY="tavars-theme-v1";
