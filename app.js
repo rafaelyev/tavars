@@ -1,5 +1,3 @@
-  toast("Promise resolved 👌", "success");
-  toast("Promise rejected 🤯", "error");
 function escapeHtml(s) {
   return String(s).replace(/[&<>"']/g, c => ({
     "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
